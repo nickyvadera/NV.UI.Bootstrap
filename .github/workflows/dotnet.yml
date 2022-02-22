@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration release
     - name: Pack
       run: dotnet pack NV.UI.Bootstrap --no-build --configuration release
     - name: Publish
