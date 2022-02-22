@@ -23,5 +23,9 @@ jobs:
       run: dotnet build --no-restore --configuration release
     - name: Pack
       run: dotnet pack NV.UI.Bootstrap --configuration release
+    - name: Echo Vars
+      run: |
+        echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+        ls
     - name: Publish
       run: dotnet nuget push NV.UI.Bootstrap/bin/release/NV.UI.Boostrap.1.0.0.nupkg --source https://nuget.pkg.github.com/nickyvadera/index.json
