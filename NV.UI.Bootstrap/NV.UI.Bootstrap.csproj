@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <PackageProjectUrl>https://github.com/nickyvadera/NV.UI.Bootstrap</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nickyvadera/NV.UI.Bootstrap.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   
