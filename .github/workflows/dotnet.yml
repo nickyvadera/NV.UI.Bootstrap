@@ -27,8 +27,6 @@ jobs:
     - name: Pack
       run: dotnet pack NV.UI.Bootstrap --configuration release --version-suffix=$GITHUB_RUN_NUMBER
       if: ${{ github.ref == 'refs/heads/master' }}
-    - name: Echo package name
-      run: ls NV.UI.Bootstrap/bin/release/*.nupkg
     - name: Set package name
       run: echo package_name=$(ls NV.UI.Bootstrap/bin/release/*.nupkg) >> $GITHUB_ENV
     - name: Publish
