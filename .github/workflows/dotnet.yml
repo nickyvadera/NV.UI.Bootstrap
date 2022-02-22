@@ -23,9 +23,11 @@ jobs:
       run: dotnet build --no-restore --configuration release
     - name: Pack
       run: dotnet pack NV.UI.Bootstrap --configuration release --version-suffix=ci-$GITHUB_RUN_NUMBER
-    - name: Get package name
-      run: package_name='ls NV.UI.Bootstrap/bin/release/*.nupkg'
+    - name: Echo package name
+      run: ls NV.UI.Bootstrap/bin/release/*.nupkg
+    - name: Set package name
+      run: echo package_name=${ls NV.UI.Bootstrap/bin/release/*.nupkg} >> $GITHUB_ENV
     - name: Publish
-      run: dotnet nuget push /NV.UI.Bootstrap/bin/release/${package_name} --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/nickyvadera/index.json
+      run: dotnet nuget push /NV.UI.Bootstrap/bin/release/${PACKAGE_NAME} --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/nickyvadera/index.json
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_NAME: ${{ env.package_name }}
