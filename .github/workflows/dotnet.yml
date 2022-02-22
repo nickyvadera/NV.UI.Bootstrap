@@ -24,4 +24,6 @@ jobs:
     - name: Pack
       run: dotnet pack NV.UI.Bootstrap --configuration release
     - name: Publish
-      run: dotnet nuget push ${GITHUB_WORKSPACE}/NV.UI.Bootstrap/bin/release/NV.UI.Bootstrap.1.0.0.nupkg --api-key {{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/nickyvadera/index.json
+      run: dotnet nuget push ${GITHUB_WORKSPACE}/NV.UI.Bootstrap/bin/release/NV.UI.Bootstrap.1.0.0.nupkg --api-key ${GITHUB_TOKEN} --source https://nuget.pkg.github.com/nickyvadera/index.json
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
