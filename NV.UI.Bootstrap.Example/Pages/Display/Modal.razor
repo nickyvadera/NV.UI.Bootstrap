@@ -1,0 +1,36 @@
+﻿@page "/display/modal"
+
+<h3>Modal</h3>
+
+<BootstrapModal Title="Standard">
+    <ChildContent>Body</ChildContent>
+    <FooterContent>Footer</FooterContent>
+</BootstrapModal>
+
+<ExampleContainer Title="States">
+    <BootstrapModal Centered Title="Centered">Content</BootstrapModal>
+    <BootstrapModal Scrollable Title="Scrollable">Content</BootstrapModal>
+    <BootstrapModal Static Title="Static">Content</BootstrapModal>
+    <BootstrapModal ShowCloseButton Title="Show Clost Button">Content</BootstrapModal>
+</ExampleContainer>
+
+<ExampleContainer Title="Sizes">
+    @foreach (BootstrapModal.ModalSize size in Enum.GetValues(typeof(BootstrapModal.ModalSize)))
+    {
+        <BootstrapModal Size="size" Title="@size.ToString()">Content</BootstrapModal>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Fullscreen Breakpoint">
+    @foreach (BootstrapModal.FullscreenBreakpoint breakpoint in Enum.GetValues(typeof(BootstrapModal.FullscreenBreakpoint)))
+    {
+        <BootstrapModal Fullscreen="breakpoint" Title="@breakpoint.ToString()">Content</BootstrapModal>
+    }
+</ExampleContainer>
+
+<style>
+    .modal {
+        position: static;
+        display: block;
+    }
+</style>

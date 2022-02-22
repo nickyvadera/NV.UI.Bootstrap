@@ -1,0 +1,58 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IHtmlHelper htmlHelper
+
+<nav class="@GetCssClasses()">
+    <BootstrapContainer Type="ContainerType">
+        @if (BrandContent != null)
+        {
+            <a class="navbar-brand" href=@BrandHref>@BrandContent</a>
+        }
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#@htmlId">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="@htmlId">
+            @ChildContent
+        </div>
+    </BootstrapContainer>
+</nav>
+
+@code {
+    private string htmlId;
+
+    public enum NavbarContext { Light, Dark }
+
+    [Parameter]
+    public RenderFragment BrandContent { get; set; }
+
+    [Parameter]
+    public string BrandHref { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public BootstrapContainer.ContainerType ContainerType { get; set; } = BootstrapContainer.ContainerType.Default;
+
+    [Parameter]
+    public NavbarContext Context { get; set; } = NavbarContext.Light;
+
+    [Parameter]
+    public Enums.Breakpoint? Expand { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    protected override void OnInitialized()
+    {
+        htmlId = htmlHelper.GenerateId();
+    }
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("navbar")
+            .AddEnumModifier(Context)
+            .AddEnumModifier(Expand, "expand")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

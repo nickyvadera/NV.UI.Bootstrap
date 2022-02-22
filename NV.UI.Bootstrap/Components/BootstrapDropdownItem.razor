@@ -1,0 +1,14 @@
+﻿<li>
+    <NavLink href=@Href Match=Match class="dropdown-item">@ChildContent</NavLink>
+</li>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Href { get; set; }
+
+    [Parameter]
+    public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+}

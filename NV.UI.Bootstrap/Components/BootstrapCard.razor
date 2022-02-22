@@ -1,0 +1,61 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<div class=@GetCssClasses()>
+    @if (HeaderContent != null)
+    {
+        <div class=@GetHeaderCssClasses()>@HeaderContent</div>
+    }
+    @if (!string.IsNullOrEmpty(ImageSrc))
+    {
+        <img src=@ImageSrc class="card-img-top" />
+    }
+    @ChildContent
+    @if (FooterContent != null)
+    {
+        <div class=@GetFooterCssClasses()>@FooterContent</div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment FooterContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder FooterStyleBuilder { get; set; }
+
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder HeaderStyleBuilder { get; set; }
+
+    [Parameter]
+    public string ImageSrc { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("card")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+
+    public string GetHeaderCssClasses()
+    {
+        return componentCssHelperFactory.Create("card-header")
+            .AddStyleBuilder(HeaderStyleBuilder)
+            .Build();
+    }
+
+    public string GetFooterCssClasses()
+    {
+        return componentCssHelperFactory.Create("card-footer")
+            .AddStyleBuilder(FooterStyleBuilder)
+            .Build();
+    }
+}

@@ -1,0 +1,44 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+@if (HasLinks)
+{
+    <div class="@GetCssClasses()">
+        @ChildContent
+    </div>
+}
+else
+{
+    <ul class="@GetCssClasses()">
+        @ChildContent
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Flush { get; set; }
+
+    [Parameter]
+    public bool HasLinks { get; set; }
+
+    [Parameter]
+    public Enums.Breakpoint? Horizontal { get; set; }
+
+    [Parameter]
+    public bool Numbered { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("list-group")
+            .AddConditionalModifier(Flush, "flush")
+            .AddConditionalModifier(Numbered, "numbered")
+            .AddEnumModifier(Horizontal, "horizontal")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

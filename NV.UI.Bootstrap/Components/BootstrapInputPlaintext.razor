@@ -1,0 +1,22 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<input class=@GetCssClasses() readonly value=@Value />
+
+@code {
+    [Parameter]
+    public Enums.Size? Size { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("form-control-plaintext")
+            .AddEnumModifier(Size)
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

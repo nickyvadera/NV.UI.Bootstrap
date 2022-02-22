@@ -1,0 +1,27 @@
+﻿@page "/display/pagination"
+
+<h3>Pagination</h3>
+
+<BootstrapPagination>
+    <BootstrapPageItem>Standard 1</BootstrapPageItem>
+    <BootstrapPageItem>Standard 2</BootstrapPageItem>
+    <BootstrapPageItem>Standard 3</BootstrapPageItem>
+</BootstrapPagination>
+
+<ExampleContainer Title="Sizes">
+    @foreach (Enums.Size size in Enum.GetValues(typeof(Enums.Size)))
+    {
+        <BootstrapPagination Size="size">
+            <BootstrapPageItem>@size 1</BootstrapPageItem>
+            <BootstrapPageItem>@size 2</BootstrapPageItem>
+            <BootstrapPageItem>@size 3</BootstrapPageItem>
+        </BootstrapPagination>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Items">
+    <BootstrapPagination>
+        <BootstrapPageItem>Standard</BootstrapPageItem>
+        <BootstrapPageItem Disabled>Disabled</BootstrapPageItem>
+    </BootstrapPagination>
+</ExampleContainer>

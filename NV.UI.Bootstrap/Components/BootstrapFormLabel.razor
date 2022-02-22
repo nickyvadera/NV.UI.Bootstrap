@@ -1,0 +1,24 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IStyleBuilderFactory styleBuilderFactory
+
+<label class="@GetCssClasses()">
+    @ChildContent
+</label>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool InColumn { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create(InColumn ? "col-form-label" : "form-label")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

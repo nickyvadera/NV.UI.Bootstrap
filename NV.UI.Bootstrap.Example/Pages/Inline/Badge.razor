@@ -1,0 +1,16 @@
+﻿@page "/inline/badge"
+
+<h3>Badge</h3>
+
+<BootstrapBadge>Standard</BootstrapBadge>
+
+<ExampleContainer Title="Backgrounds">
+    @foreach (Enums.BackgroundColour background in Enum.GetValues(typeof(Enums.BackgroundColour)))
+    {
+        <BootstrapBadge Background="background">@background</BootstrapBadge>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="States">
+    <BootstrapBadge Pill>Pill</BootstrapBadge>
+</ExampleContainer>

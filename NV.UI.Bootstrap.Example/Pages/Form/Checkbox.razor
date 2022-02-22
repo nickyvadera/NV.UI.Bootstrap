@@ -1,0 +1,38 @@
+﻿@page "/form/checkbox"
+
+<h3>Checkbox</h3>
+
+<BootstrapCheckbox Label="Standard "/>
+
+<ExampleContainer Title="States">
+    <BootstrapCheckbox Checked Label="Checked" />
+    <BootstrapCheckbox Disabled Label="Disabled" />
+    <BootstrapCheckbox Inline Label="Inline" />
+</ExampleContainer>
+
+<ExampleContainer Title="No Label">
+    <ExampleItem Label="Standard">
+        <BootstrapCheckbox />
+    </ExampleItem>
+    <ExampleItem Label="Checked">
+        <BootstrapCheckbox Checked />
+    </ExampleItem>
+    <ExampleItem Label="Disabled">
+        <BootstrapCheckbox Disabled />
+    </ExampleItem>
+    <ExampleItem Label="Inline">
+        <BootstrapCheckbox Inline />
+    </ExampleItem>
+</ExampleContainer>
+
+<ExampleContainer Title="Types">
+    @foreach (BootstrapCheckbox.CheckboxType type in Enum.GetValues(typeof(BootstrapCheckbox.CheckboxType)))
+    {
+        <BootstrapCheckbox Type="@type" Label="@type.ToString()" />
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Validity">
+    <BootstrapCheckbox IsValid AlwaysShowValidity Label="IsValid" />
+    <BootstrapCheckbox IsInvalid AlwaysShowValidity Label="IsInvalid" />
+</ExampleContainer>

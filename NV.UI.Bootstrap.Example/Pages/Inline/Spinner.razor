@@ -1,0 +1,38 @@
+﻿@page "/inline/spinner"
+
+<h3>Spinner</h3>
+
+<BootstrapSpinner />
+
+<ExampleContainer Title="States">
+    <ExampleItem Label="Small">
+        <BootstrapSpinner Small />
+    </ExampleItem>
+</ExampleContainer>
+
+<ExampleContainer Title="Colours">
+    @foreach (Enums.TextColour colour in Enum.GetValues(typeof(Enums.TextColour)))
+    {
+        <ExampleItem Label="@colour.ToString()">
+            <BootstrapSpinner Colour="colour" />
+        </ExampleItem>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Grow Colours">
+    @foreach (Enums.TextColour colour in Enum.GetValues(typeof(Enums.TextColour)))
+    {
+        <ExampleItem Label="@colour.ToString()">
+            <BootstrapSpinner Colour="colour" Type="BootstrapSpinner.SpinnerType.Grow" />
+        </ExampleItem>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Thicknesses">
+    @foreach (Enums.BorderWidth borderWidth in Enum.GetValues(typeof(Enums.BorderWidth)))
+    {
+        <ExampleItem Label="@borderWidth.ToString()">
+            <BootstrapSpinner Thickness="borderWidth" />
+        </ExampleItem>
+    }
+</ExampleContainer>

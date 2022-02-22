@@ -1,0 +1,125 @@
+﻿@using Microsoft.JSInterop
+@using System.ComponentModel
+
+@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IJSRuntime JS
+
+<div @ref="modalElement" class=@GetCssClasses() data-bs-backdrop="@(Static ? "static" : false)" data-bs-keyboard="@(Static ? "false" : false)">
+    <div class=@GetDialogCssClasses()>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Title</h5>
+                @if (ShowCloseButton)
+                {
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="@OnCloseButtonClickCallback"></button>
+                }
+            </div>
+            <div class="modal-body">
+                @ChildContent
+            </div>
+            @if (FooterContent != null)
+            {
+                <div class="modal-footer">
+                    @FooterContent
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private ElementReference modalElement;
+
+    public enum ModalSize
+    {
+        [Description(null)]
+        Default,
+        [Description("sm")]
+        Small,
+        [Description("lg")]
+        Large,
+        [Description("xl")]
+        ExtraLarge
+    }
+
+    public enum FullscreenBreakpoint
+    {
+        [Description(null)]
+        Default,
+        [Description("sm-down")]
+        Small,
+        [Description("md-down")]
+        Medium,
+        [Description("lg-down")]
+        Large,
+        [Description("xl-down")]
+        ExtraLarge,
+        [Description("xxl-down")]
+        ExtraExtraLarge
+    }
+
+    [Parameter]
+    public bool Centered { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Fade { get; set; }
+
+    [Parameter]
+    public RenderFragment FooterContent { get; set; }
+
+    [Parameter]
+    public FullscreenBreakpoint? Fullscreen { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnCloseButtonClickCallback { get; set; }
+
+    [Parameter]
+    public bool Scrollable { get; set; }
+
+    [Parameter]
+    public ModalSize Size { get; set; } = ModalSize.Default;
+
+    [Parameter]
+    public bool ShowCloseButton { get; set; }
+    
+    [Parameter]
+    public bool Static { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    public async Task Show()
+    {
+        await JS.InvokeVoidAsync("callFunctionOnObject", await GetBootstrapModalInstance(), "show");
+    }
+
+    public async Task Hide()
+    {
+        await JS.InvokeVoidAsync("callFunctionOnObject", await GetBootstrapModalInstance(), "hide");
+    }
+
+    private async Task<IJSObjectReference> GetBootstrapModalInstance()
+    {
+        return await JS.InvokeAsync<IJSObjectReference>("callFunctionOnObject", "bootstrap.Modal", "getOrCreateInstance", modalElement);
+    }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("modal")
+            .AddConditionalClass(Fade, "fade")
+            .Build();
+    }
+
+    private string GetDialogCssClasses()
+    {
+        return componentCssHelperFactory.Create("modal-dialog")
+            .AddEnumClass(Fullscreen, "modal-fullscreen")
+            .AddConditionalClass(Size != ModalSize.Default, "modal", Size.GetDescription())
+            .AddConditionalModifier(Centered, "centered")
+            .AddConditionalModifier(Scrollable, "scrollable")
+            .Build();
+    }
+}

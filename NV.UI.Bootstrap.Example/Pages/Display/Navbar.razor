@@ -1,0 +1,99 @@
+﻿@page "/display/navbar"
+
+<h3>Navbar</h3>
+
+<BootstrapNavbar Expand="Enums.Breakpoint.Default">
+    <BrandContent>Standard</BrandContent>
+    <ChildContent>
+        <BootstrapNavbarNav>
+            <BootstrapNavItem>Nav Item</BootstrapNavItem>
+        </BootstrapNavbarNav>
+    </ChildContent>
+</BootstrapNavbar>
+
+<ExampleContainer Title="States" Vertical>
+    <BootstrapNavbar BrandHref="#" Expand="Enums.Breakpoint.Default">
+        <BrandContent>Brand Href</BrandContent>
+        <ChildContent>
+            <BootstrapNavbarNav>
+                <BootstrapNavItem>Nav Item</BootstrapNavItem>
+            </BootstrapNavbarNav>
+        </ChildContent>
+    </BootstrapNavbar>
+    <BootstrapNavbar Expand="Enums.Breakpoint.Default">
+        <BrandContent>Additional Content</BrandContent>
+        <ChildContent>
+            <BootstrapNavbarNav>
+                <BootstrapNavItem>Nav Item</BootstrapNavItem>
+            </BootstrapNavbarNav>
+            <form>
+                <BootstrapSelect>
+                    <option>Navbar Select</option>
+                </BootstrapSelect>
+            </form>
+        </ChildContent>
+    </BootstrapNavbar>
+    <BootstrapNavbar Expand="Enums.Breakpoint.Default">
+        <BrandContent>Link Item</BrandContent>
+        <ChildContent>
+            <BootstrapNavbarNav>
+                <BootstrapNavItem Href="#">Nav Link</BootstrapNavItem>
+            </BootstrapNavbarNav>
+        </ChildContent>
+    </BootstrapNavbar>
+    <BootstrapNavbar Expand="Enums.Breakpoint.Default">
+        <BrandContent>Dropdown Item</BrandContent>
+        <ChildContent>
+            <BootstrapNavbarNav>
+                <BootstrapNavItem>
+                    <ChildContent>Dropdown Item</ChildContent>
+                    <DropdownContent>
+                        <BootstrapDropdownItem>Dropdown Item</BootstrapDropdownItem>
+                    </DropdownContent>
+                </BootstrapNavItem>
+            </BootstrapNavbarNav>
+        </ChildContent>
+    </BootstrapNavbar>
+</ExampleContainer>
+
+<ExampleContainer Title="Container Types" Vertical>
+    @foreach (BootstrapContainer.ContainerType type in Enum.GetValues(typeof(BootstrapContainer.ContainerType)))
+    {
+        <BootstrapNavbar ContainerType="type" Expand="Enums.Breakpoint.Default">
+            <BrandContent>Container Type @type</BrandContent>
+            <ChildContent>
+                <BootstrapNavbarNav>
+                    <BootstrapNavItem>Nav Item</BootstrapNavItem>
+                </BootstrapNavbarNav>
+            </ChildContent>
+        </BootstrapNavbar>   
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Contexts" Vertical>
+    @foreach (BootstrapNavbar.NavbarContext context in Enum.GetValues(typeof(BootstrapNavbar.NavbarContext)))
+    {
+        <BootstrapNavbar Context="context" Expand="Enums.Breakpoint.Default">
+            <BrandContent>Context @context</BrandContent>
+            <ChildContent>
+                <BootstrapNavbarNav>
+                    <BootstrapNavItem>Nav Item</BootstrapNavItem>
+                </BootstrapNavbarNav>
+            </ChildContent>
+        </BootstrapNavbar>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Expand Breakpoints" Vertical>
+    @foreach (Enums.Breakpoint breakpoint in Enum.GetValues(typeof(Enums.Breakpoint)))
+    {
+        <BootstrapNavbar Expand="breakpoint">
+            <BrandContent>Expand @breakpoint</BrandContent>
+            <ChildContent>
+                <BootstrapNavbarNav>
+                    <BootstrapNavItem>Nav Item</BootstrapNavItem>
+                </BootstrapNavbarNav>
+            </ChildContent>
+        </BootstrapNavbar>
+    }
+</ExampleContainer>

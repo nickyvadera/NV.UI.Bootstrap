@@ -1,0 +1,23 @@
+﻿@if (!string.IsNullOrEmpty(Title))
+{
+    <h4 style="margin-top: 1rem;">@Title</h4>
+}
+<div style="@GetStyle()">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Vertical { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    private string GetStyle()
+    {
+        return Vertical ? "display:flex;flex-direction:column;gap:1rem" : "display:flex;align-items:center;gap:1rem;flex-wrap:wrap;";
+    }
+}

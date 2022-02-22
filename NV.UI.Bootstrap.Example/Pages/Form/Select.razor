@@ -1,0 +1,46 @@
+﻿@page "/form/select"
+
+<h3>Select</h3>
+
+<BootstrapSelect>
+    <option>Standard</option>
+</BootstrapSelect>
+
+<ExampleContainer Title="States" Vertical>
+    <BootstrapSelect Disabled>
+        <option>Disabled</option>
+    </BootstrapSelect>
+    <BootstrapSelect Multiple>
+        <option>Multiple 1</option>
+        <option>Multiple 2</option>
+        <option>Multiple 3</option>
+    </BootstrapSelect>
+</ExampleContainer>
+
+<ExampleContainer Title="Sizes">
+    @foreach (Enums.Size size in Enum.GetValues(typeof(Enums.Size)))
+    {
+        <BootstrapSelect Size="size">
+            <option>@size</option>
+        </BootstrapSelect>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Validity">
+    <BootstrapSelect IsValid>
+        <option>IsValid</option>
+        <option>IsValid</option>
+    </BootstrapSelect>
+    <BootstrapSelect IsValid IsDirty>
+        <option>IsValid (IsDirty)</option>
+        <option>IsValid (IsDirty)</option>
+    </BootstrapSelect>
+    <BootstrapSelect IsInvalid>
+        <option>IsInvalid</option>
+        <option>IsInvalid</option>
+    </BootstrapSelect>
+    <BootstrapSelect IsInvalid IsDirty>
+        <option>IsInvalid (IsDirty)</option>
+        <option>IsInvalid (IsDirty)</option>
+    </BootstrapSelect>
+</ExampleContainer>

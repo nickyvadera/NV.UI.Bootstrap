@@ -1,0 +1,64 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<input class=@GetCssClasses() disabled=@Disabled placeholder=@Placeholder readonly=@Readonly type=@Type value=@Value @onchange=HandleChange @attributes="InputAttributes" />
+
+@code {
+    private bool isDirty;
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
+
+    [Parameter]
+    public bool IsDirty { get; set; }
+
+    [Parameter]
+    public bool IsInvalid { get; set; }
+
+    [Parameter]
+    public bool IsValid { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnChangeCallback { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public bool Readonly { get; set; }
+
+    [Parameter]
+    public Enums.Size? Size { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    [Parameter]
+    public string Type { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("form-control")
+            .AddConditionalClass(IsInvalid && (isDirty || IsDirty), "is-invalid")
+            .AddConditionalClass(IsValid && (isDirty || IsDirty), "is-valid")
+            .AddConditionalModifier(Type == "color", "color")
+            .AddEnumModifier(Size)
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+
+    private async Task HandleChange(ChangeEventArgs e)
+    {
+        isDirty = true;
+        await OnChangeCallback.InvokeAsync(e);
+        await ValueChanged.InvokeAsync(e.Value.ToString());
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page "/display/listgroup"
+
+<h3>List Group</h3>
+
+<BootstrapListGroup>
+    <BootstrapListGroupItem>Standard 1</BootstrapListGroupItem>
+    <BootstrapListGroupItem>Standard 2</BootstrapListGroupItem>
+    <BootstrapListGroupItem>Standard 3</BootstrapListGroupItem>
+</BootstrapListGroup>
+
+<ExampleContainer Title="Types" Vertical>
+    <BootstrapListGroup Flush>
+        <BootstrapListGroupItem>Flush 1</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Flush 2</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Flush 3</BootstrapListGroupItem>
+    </BootstrapListGroup>
+    <BootstrapListGroup HasLinks>
+        <BootstrapListGroupItem Link="#">HasLinks 1</BootstrapListGroupItem>
+        <BootstrapListGroupItem Link="#">HasLinks 2</BootstrapListGroupItem>
+        <BootstrapListGroupItem Link="#">HasLinks 3</BootstrapListGroupItem>
+    </BootstrapListGroup>
+    <BootstrapListGroup Horizontal="Enums.Breakpoint.Default">
+        <BootstrapListGroupItem>Horizontal 1</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Horizontal 2</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Horizontal 3</BootstrapListGroupItem>
+    </BootstrapListGroup>
+    <BootstrapListGroup Numbered>
+        <BootstrapListGroupItem>Numbered 1</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Numbered 2</BootstrapListGroupItem>
+        <BootstrapListGroupItem>Numbered 3</BootstrapListGroupItem>
+    </BootstrapListGroup>
+</ExampleContainer>
+
+<ExampleContainer Title="Items" Vertical>
+    <BootstrapListGroup>
+        <BootstrapListGroupItem>Standard Item</BootstrapListGroupItem>
+        <BootstrapListGroupItem Action>Action Item</BootstrapListGroupItem>
+        <BootstrapListGroupItem Active>Active Item</BootstrapListGroupItem>
+        <BootstrapListGroupItem Disabled>Disabled Item</BootstrapListGroupItem>
+    </BootstrapListGroup>
+    <BootstrapListGroup>
+        @foreach (Enums.Context context in Enum.GetValues(typeof(Enums.Context)))
+        {
+            <BootstrapListGroupItem Context="context">@context Item</BootstrapListGroupItem>
+        }
+    </BootstrapListGroup>
+    <BootstrapListGroup>
+        @foreach (Enums.Context context in Enum.GetValues(typeof(Enums.Context)))
+        {
+            <BootstrapListGroupItem Context="context" Action>@context Action Item</BootstrapListGroupItem>
+        }
+    </BootstrapListGroup>
+</ExampleContainer>

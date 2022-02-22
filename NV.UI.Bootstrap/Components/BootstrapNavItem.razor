@@ -1,0 +1,45 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<li class="@GetCssClasses()">
+    <NavLink href=@Href Match=Match class="@GetLinkCssClasses()" data-bs-toggle="@(DropdownContent == null ? false : "dropdown")">@ChildContent</NavLink>
+    @if (DropdownContent != null)
+    {
+        <ul class="@GetMenuCssClasses()">
+            @DropdownContent
+        </ul>
+    }
+</li>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment DropdownContent { get; set; }
+
+    [Parameter]
+    public string Href { get; set; }
+
+    [Parameter]
+    public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("nav-item")
+            .AddConditionalClass(DropdownContent != null, "dropdown")
+            .Build();
+    }
+
+    private string GetLinkCssClasses()
+    {
+        return componentCssHelperFactory.Create("nav-link")
+            .AddConditionalClass(DropdownContent != null, "dropdown-toggle")
+            .Build();
+    }
+
+    private string GetMenuCssClasses()
+    {
+        return componentCssHelperFactory.Create("dropdown-menu")
+            .Build();
+    }
+}

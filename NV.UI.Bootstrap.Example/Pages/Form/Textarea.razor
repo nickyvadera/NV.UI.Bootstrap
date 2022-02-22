@@ -1,0 +1,42 @@
+﻿@page "/form/textarea"
+
+<h3>Textarea</h3>
+
+<BootstrapTextarea Value="Standard" />
+
+<ExampleContainer Title="States" Vertical>
+    <BootstrapTextarea Disabled Value="Disabled" />
+    <BootstrapTextarea Placeholder="Placeholder" />
+    <BootstrapTextarea Readonly Value="Readonly" />
+</ExampleContainer>
+
+<ExampleContainer Title="Sizes" Vertical>
+    @foreach (Enums.Size size in Enum.GetValues(typeof(Enums.Size)))
+    {
+        <BootstrapTextarea Size=size Value=@size.ToString() />
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Validity">
+    <ExampleItem Label="IsValid">
+        <BootstrapTextarea IsValid />
+    </ExampleItem>
+    <ExampleItem Label="IsValid (IsDirty)">
+        <BootstrapTextarea IsValid IsDirty />
+    </ExampleItem>
+    <ExampleItem Label="IsInvalid">
+        <BootstrapTextarea IsInvalid />
+    </ExampleItem>
+    <ExampleItem Label="IsInvalid (IsDirty)">
+        <BootstrapTextarea IsInvalid IsDirty />
+    </ExampleItem>
+</ExampleContainer>
+
+<ExampleContainer Title="Additional Attributes">
+    <ExampleItem Label="Required">
+        <BootstrapTextarea required />
+    </ExampleItem>
+    <ExampleItem Label="MaxLength: 1">
+        <BootstrapTextarea maxlength="1" />
+    </ExampleItem>
+</ExampleContainer>

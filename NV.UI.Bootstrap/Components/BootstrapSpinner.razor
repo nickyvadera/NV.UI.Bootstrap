@@ -1,0 +1,39 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IStyleBuilderFactory styleBuilderFactory
+
+<div class="@GetCssClasses()"></div>
+
+@code {
+    public enum SpinnerType { Border, Grow }
+
+    [Parameter]
+    public Enums.TextColour? Colour { get; set; }
+
+    [Parameter]
+    public bool Small { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    [Parameter]
+    public Enums.BorderWidth? Thickness { get; set; }
+
+    [Parameter]
+    public SpinnerType Type { get; set; } = SpinnerType.Border;
+
+    protected override void OnParametersSet()
+    {
+        if (StyleBuilder == null)
+            StyleBuilder = styleBuilderFactory.Create();
+        StyleBuilder.WithTextColour(Colour);
+        StyleBuilder.WithBorderWidth(Thickness);
+    }
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create($"spinner-{Type.GetDescription()}")
+            .AddConditionalModifier(Small, "sm")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

@@ -1,0 +1,35 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IStyleBuilderFactory styleBuilderFactory
+
+<span class="@GetCssClasses()">
+    @ChildContent
+</span>
+
+@code {
+    [Parameter]
+    public Enums.BackgroundColour Background { get; set; } = Enums.BackgroundColour.Secondary;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Pill { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (StyleBuilder == null)
+            StyleBuilder = styleBuilderFactory.Create();
+        StyleBuilder.WithBackground(Background);
+        StyleBuilder.WithRounded(Pill ? Enums.Rounded.Pill : null);
+    }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("badge")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

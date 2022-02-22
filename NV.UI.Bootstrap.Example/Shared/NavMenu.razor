@@ -1,0 +1,40 @@
+﻿@inject IStyleBuilderFactory styleBuilderFactory
+<BootstrapNavbar StyleBuilder="styleBuilderFactory.Create().WithBackground(Enums.BackgroundColour.White).WithShadow(Enums.ShadowSize.Small).WithMargin(Enums.Spacing.Three, Enums.Side.Bottom)"
+                 Expand="Enums.Breakpoint.Large"
+                 BrandHref="">
+    <BrandContent>Bootstrap Component Examples</BrandContent>
+    <ChildContent>
+        <BootstrapNavbarNav StyleBuilder="styleBuilderFactory.Create().WithMargin(Enums.Spacing.Auto, Enums.Side.End).WithMargin(Enums.Spacing.Two, Enums.Side.Bottom).WithMargin(Enums.Spacing.Zero, Enums.Side.Bottom, Enums.Breakpoint.Large)">
+            <BootstrapNavItem Href="" Match="NavLinkMatch.All">Home</BootstrapNavItem>
+            <BootstrapNavItem Href="display" Match="NavLinkMatch.Prefix">
+                <ChildContent>Display Controls</ChildContent>
+                <DropdownContent>
+                    <BootstrapDropdownItem Href="display/card">Card</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="display/listgroup">List Group</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="display/modal">Modal</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="display/navbar">Navbar</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="display/pagination">Pagination</BootstrapDropdownItem>
+                </DropdownContent>
+            </BootstrapNavItem>
+            <BootstrapNavItem Href="form" Match="NavLinkMatch.Prefix">
+                <ChildContent>Form Controls</ChildContent>
+                <DropdownContent>
+                    <BootstrapDropdownItem Href="form/button">Button</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="form/checkbox">Checkbox</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="form/input">Input</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="form/range">Range</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="form/select">Select</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="form/textarea">Textarea</BootstrapDropdownItem>
+                </DropdownContent>
+            </BootstrapNavItem>
+            <BootstrapNavItem Href="inline" Match="NavLinkMatch.Prefix">
+                <ChildContent>Inline Controls</ChildContent>
+                <DropdownContent>
+                    <BootstrapDropdownItem Href="inline/badge">Badge</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="inline/icon">Icon</BootstrapDropdownItem>
+                    <BootstrapDropdownItem Href="inline/spinner">Spinner</BootstrapDropdownItem>
+                </DropdownContent>
+            </BootstrapNavItem>
+        </BootstrapNavbarNav>
+    </ChildContent>
+</BootstrapNavbar>

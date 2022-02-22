@@ -1,0 +1,31 @@
+﻿@page "/form/button"
+
+<h3>Button</h3>
+
+<BootstrapButton>Standard</BootstrapButton>
+<ExampleContainer Title="Contexts">
+    @foreach (Enums.ButtonContext context in Enum.GetValues(typeof(Enums.ButtonContext)))
+    {
+        <BootstrapButton Context="context">@context</BootstrapButton>
+    }
+</ExampleContainer>
+<ExampleContainer Title="Outline Contexts">
+    @foreach (Enums.ButtonContext context in Enum.GetValues(typeof(Enums.ButtonContext)))
+    {
+        <BootstrapButton Context="context" Outline>@context</BootstrapButton>
+    }
+</ExampleContainer>
+<ExampleContainer Title="Sizes">
+    @foreach (Enums.Size size in Enum.GetValues(typeof(Enums.Size)))
+    {
+        <BootstrapButton Size="size" Outline>@size</BootstrapButton>
+    }
+</ExampleContainer>
+<ExampleContainer Title="States">
+    <BootstrapButton Disabled>Disabled</BootstrapButton>
+</ExampleContainer>
+<ExampleContainer Title="Types">
+    <BootstrapButton Type="BootstrapButton.ButtonType.Button">Button</BootstrapButton>
+    <BootstrapButton Type="BootstrapButton.ButtonType.Reset">Reset</BootstrapButton>
+    <BootstrapButton Type="BootstrapButton.ButtonType.Submit">Submit</BootstrapButton>
+</ExampleContainer>

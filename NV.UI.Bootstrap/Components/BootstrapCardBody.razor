@@ -1,0 +1,54 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<div class=@GetCssClasses()>
+    @if (!string.IsNullOrEmpty(Title))
+    {
+        <h5 class=@GetTitleCssClasses()>@Title</h5>
+    }
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        <p class=@GetTextCssClasses()>@Text</p>
+    }
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public IStyleBuilder TextStyleBuilder { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public IStyleBuilder TitleStyleBuilder { get; set; }
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("card-body")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+
+    public string GetTextCssClasses()
+    {
+        return componentCssHelperFactory.Create("card-text")
+            .AddStyleBuilder(TextStyleBuilder)
+            .Build();
+    }
+
+    public string GetTitleCssClasses()
+    {
+        return componentCssHelperFactory.Create("card-title")
+            .AddStyleBuilder(TitleStyleBuilder)
+            .Build();
+    }
+}

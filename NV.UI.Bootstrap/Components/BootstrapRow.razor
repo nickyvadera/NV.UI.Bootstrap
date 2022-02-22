@@ -1,0 +1,20 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<div class=@GetCssClasses()>
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("row")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

@@ -1,0 +1,20 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<ul class=@GetCssClasses()>
+    @ChildContent
+</ul>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("navbar-nav")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

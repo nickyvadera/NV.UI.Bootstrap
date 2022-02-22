@@ -1,0 +1,34 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+@Render()
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Type { get; set; } = "div";
+
+    [Parameter]
+    public string Style { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("")
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+
+    private RenderFragment Render() => builder =>
+    {
+        builder.OpenElement(0, Type);
+        builder.AddAttribute(1, "class", GetCssClasses());
+        builder.AddAttribute(2, "style", Style);
+        builder.AddContent(3, ChildContent);
+        builder.CloseComponent();
+    };
+}

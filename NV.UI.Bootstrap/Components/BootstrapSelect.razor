@@ -1,0 +1,59 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<select class=@GetCssClasses() disabled=@Disabled multiple=@Multiple value=@Value @onchange=HandleChange>
+    @ChildContent
+</select>
+
+@code {
+    private bool isDirty;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public bool Multiple { get; set; }
+
+    [Parameter]
+    public bool IsDirty { get; set; }
+
+    [Parameter]
+    public bool IsInvalid { get; set; }
+
+    [Parameter]
+    public bool IsValid { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnChangeCallback { get; set; }
+
+    [Parameter]
+    public Enums.Size? Size { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("form-select")
+            .AddConditionalClass(IsInvalid && (isDirty || IsDirty), "is-invalid")
+            .AddConditionalClass(IsValid && (isDirty || IsDirty), "is-valid")
+            .AddEnumModifier(Size)
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+
+    private async Task HandleChange(ChangeEventArgs e)
+    {
+        isDirty = true;
+        await OnChangeCallback.InvokeAsync(e);
+        await ValueChanged.InvokeAsync(e.Value.ToString());
+    }
+}

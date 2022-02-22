@@ -1,0 +1,26 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<nav>
+    <ul class="@GetCssClasses()">
+        @ChildContent
+    </ul>
+</nav>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public Enums.Size Size { get; set; } = Enums.Size.Default;
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    public string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("pagination")
+            .AddConditionalModifier(Size != Enums.Size.Default, Size.GetDescription())
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}

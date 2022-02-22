@@ -1,0 +1,21 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+@inject IStyleBuilderFactory styleBuilderFactory
+
+<div class=@GetCssClasses()>
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("column")
+            .AddStyleBuilder(StyleBuilder ?? styleBuilderFactory.CreateForColumn().WithColumn())
+            .Build();
+    }
+}

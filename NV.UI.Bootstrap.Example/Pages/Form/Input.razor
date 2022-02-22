@@ -1,0 +1,51 @@
+﻿@page "/form/input"
+
+<h3>Input</h3>
+
+<BootstrapInput Value="Standard" />
+
+<ExampleContainer Title="States" Vertical>
+    <BootstrapInput Disabled Value="Disabled" />
+    <BootstrapInput Placeholder="Placeholder" />
+    <BootstrapInput Readonly Value="Readonly" />
+</ExampleContainer>
+
+<ExampleContainer Title="Sizes" Vertical>
+    @foreach (Enums.Size size in Enum.GetValues(typeof(Enums.Size)))
+    {
+        <BootstrapInput Size=size Value=@size.ToString() />
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Types">
+    @foreach (var type in new string[] { "datetime-local", "color", "email", "month", "number", "password", "search", "tel", "time", "week", "url" })
+    {
+        <ExampleItem Label="@type">
+            <BootstrapInput Type=@type />
+        </ExampleItem>
+    }
+</ExampleContainer>
+
+<ExampleContainer Title="Validity">
+    <ExampleItem Label="IsValid">
+        <BootstrapInput IsValid />
+    </ExampleItem>
+    <ExampleItem Label="IsValid (IsDirty)">
+        <BootstrapInput IsValid IsDirty />
+    </ExampleItem>
+    <ExampleItem Label="IsInvalid">
+        <BootstrapInput IsInvalid />
+    </ExampleItem>
+    <ExampleItem Label="IsInvalid (IsDirty)">
+        <BootstrapInput IsInvalid IsDirty />
+    </ExampleItem>
+</ExampleContainer>
+
+<ExampleContainer Title="Additional Attributes">
+    <ExampleItem Label="Required">
+        <BootstrapInput required />
+    </ExampleItem>
+    <ExampleItem Label="MaxLength: 1">
+        <BootstrapInput maxlength="1" />
+    </ExampleItem>
+</ExampleContainer>

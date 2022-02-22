@@ -1,0 +1,19 @@
+﻿@inject IComponentCssHelperFactory componentCssHelperFactory
+
+<i class=@GetCssClasses()></i>
+
+@code {
+    [Parameter]
+    public string Icon { get; set; }
+
+    [Parameter]
+    public IStyleBuilder StyleBuilder { get; set; }
+
+    private string GetCssClasses()
+    {
+        return componentCssHelperFactory.Create("bi")
+            .AddModifier(Icon)
+            .AddStyleBuilder(StyleBuilder)
+            .Build();
+    }
+}
